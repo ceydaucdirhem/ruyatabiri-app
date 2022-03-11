@@ -1,0 +1,36 @@
+=<ion-header [translucent]="false">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+
+    </ion-buttons>
+    <ion-title>Ruya App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!--Searcbar with placeholder-->
+  <ion-searchbar placeholder="Rüyanda ne gördün?" color="black" [(ngModel)]="kelime" (ngModelChange)="ruyaBul()"></ion-searchbar>
+
+<!---https://microwebservice.online/ecodation/12subat/ceyda/ruya_servis_api.php?kelime=-->
+
+
+<ion-card-header>
+  <ion-card-subtitle>{{kelime ? kelime+' '+'kelimesine ait sonuçlar:' :'Ne gördün'}} </ion-card-subtitle>
+  <ion-card-title>{{kelime?' ':'Hoşgeldin'}}</ion-card-title>
+</ion-card-header>
+
+<ion-card-content *ngIf="!kelime">
+  rüya app uygulaması senin rüyalarını analiz edip sana en doğru sonucu getirmeyi hedeflemektedir.
+</ion-card-content>
+
+<img *ngIf="!kelime" style="display: flex; align-items: center;justify-content: center;height: 40%;" src="https://cdn.dribbble.com/users/2450401/screenshots/5836452/media/2f48103469c37aedf4d69d601de5c362.gif">
+<div *ngIf="kelime">
+  <ion-list>
+    <ion-item *ngFor="let ruya of ruyalar" [routerLink]="['/detay',ruya.id]" routerLinkActive="router-link-active" >
+      <ion-label>{{ruya.adi}}</ion-label>
+    </ion-item>  
+  </ion-list>
+
+</div>
+
+</ion-content>
